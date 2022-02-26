@@ -1,8 +1,11 @@
 import './App.css';
 import {BrowserRouter as Router,Routes,Route,Link,Outlet,useParams} from "react-router-dom";
+import {motion,AnimatePresence, AnimateSharedLayout} from "framer-motion";
+
 
 function App() {
   return (
+    <AnimateSharedLayout type="crossfade">
     <div className="App">
       <Router>
 
@@ -21,6 +24,7 @@ function App() {
         </Routes>
       </Router>
     </div>
+    </AnimateSharedLayout>
   );
 }
 
@@ -43,14 +47,15 @@ function LaunchProduct(){
   const {name,img,price}  = shoe;
 
   return (
-    <div className='Product__Card'>
-      <img src={img} alt={name}/>
+    <motion.div initial={{opacity:0}} animate={{opacity:1,
+    transitionDelay:3}} exit={{opacity:0}} className='Product__Card'>
+      <motion.img layoutId={slug}  src={img} alt={name}/>
       <div className='Product__details'>
         <h3>{name}</h3>
         <p>{price}</p>
         <button>Buy Now</button>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -73,17 +78,20 @@ function Title(){
 
 function Product(){
   return (
+    
       <ul>
           {Object.entries(shoes).map(([slug,{name,img}]) => (
           <li key={slug} > 
             <Link to= {`/products/${slug}`}>
-            <img src={img} alt={name} /> 
+            <motion.img layoutId={slug}  whileHover={{
+              scale:1.05,
+              // boxShadow: "0 0 0.2rem grey"
+            }} src={img} alt={name} /> 
             <h2>{name}</h2> 
             </Link>
           </li> 
           ))}
       </ul>
-      
   );
 }
 
