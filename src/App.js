@@ -31,7 +31,7 @@ function App() {
 function NotFound(){
   return (
     <div>
-      <h1>Page not Found or Invalid url.</h1>
+      <h1>Page not Found or Invalid url or try going to products page.</h1>
     </div>
   )
 }
